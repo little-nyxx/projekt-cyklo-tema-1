@@ -10,7 +10,21 @@
  $poradi = 1;
 
  foreach ($zavodyYear as $row) {
-     $table->addRow($row->real_name, $row->year, "datum = udělat aby bylo pěkné", "načíst obrázek", $row->category, "vlajka", $row->year, "sečíst počet kilometrů z tabulky stage :)))");
+    if ($row->start_date != $row->end_date) {
+        $output = date("d. m. Y", strtotime($row->start_date))." - ".date("d. m. Y", strtotime($row->end_date));
+    } else {
+        $output = date("d. m. Y", strtotime($row->start_date));
+    }
+    $imgLogo = null;
+    if ($row->logo != null) {
+        $imgLogo = array(
+        "src" => base_url("obrazky/".$row->logo),
+        "class" => "card-img-bottom",
+        "alt" => "Logo závodu ".$row->real_name
+        );
+    }
+
+    $table->addRow($row->real_name, $row->year, $output, img ($imgLogo), $row->category, "vlajka ".$row->country, $row->year, "sečíst počet kilometrů z tabulky stage :)))");
  }
 
  $template = array(
