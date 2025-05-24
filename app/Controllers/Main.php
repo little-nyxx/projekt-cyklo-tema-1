@@ -30,11 +30,9 @@ class Main extends BaseController
 
     public function zavod($idRace) {
         $data["zavodyYear"] = $this->zavodyYear->where("id_race", $idRace)->findAll();
-        /*
-        $pocetKilometru = $this->stage->select("stage.distance, Count(*) as pocetKm")->join("race_year", "race_year.id = stage.id_race_year", "inner")->findAll();
-        $data["pocetKilometru"] = $pocetKilometru;
-        --> hází chybu, jdu už mimir, dobrou nooc :3
-        */
+        /* $typ = $this->tourType->join("race_year", "race_year.uci_tour = uci_tour_type.id", "inner")->where("id_race", $idRace)->findAll();
+        $data["typ"] = $typ;
+        --> zakomentované, protože mi (asi) nefunguje composer = nejde mi vytvořit model uci_tour_type, pozkoušet pak ve škole, jestli funguje => kdyžtak upravit pak dát do view*/
 
         echo view("jednotlivyZavod", $data);
     }
